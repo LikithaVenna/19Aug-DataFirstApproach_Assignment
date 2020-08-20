@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="JulyDotNetBatch2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customers_Table">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="int" Nullable="false" />
+          <Property Name="customerName" Type="varchar" MaxLength="20" />
+          <Property Name="proId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="int" Nullable="false" />
+          <Property Name="proName" Type="varchar" MaxLength="20" />
+          <Property Name="proRate" Type="int" />
+        </EntityType>
+        <Association Name="FK_Customers_Table_ProductTable">
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+          <End Role="Customers_Table" Type="Self.Customers_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTable">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Customers_Table">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JulyDotNetBatch2020ModelStoreContainer">
+          <EntitySet Name="Customers_Table" EntityType="Self.Customers_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Customers_Table_ProductTable" Association="Self.FK_Customers_Table_ProductTable">
+            <End Role="ProductTable" EntitySet="ProductTable" />
+            <End Role="Customers_Table" EntitySet="Customers_Table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="JulyDotNetBatch2020Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customers_Table">
+          <Key>
+            <PropertyRef Name="customerId" />
+          </Key>
+          <Property Name="customerId" Type="Int32" Nullable="false" />
+          <Property Name="customerName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="proId" Type="Int32" />
+          <NavigationProperty Name="ProductTable" Relationship="Self.FK_Customers_Table_ProductTable" FromRole="Customers_Table" ToRole="ProductTable" />
+        </EntityType>
+        <EntityType Name="ProductTable">
+          <Key>
+            <PropertyRef Name="proId" />
+          </Key>
+          <Property Name="proId" Type="Int32" Nullable="false" />
+          <Property Name="proName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="proRate" Type="Int32" />
+          <NavigationProperty Name="Customers_Table" Relationship="Self.FK_Customers_Table_ProductTable" FromRole="ProductTable" ToRole="Customers_Table" />
+        </EntityType>
+        <Association Name="FK_Customers_Table_ProductTable">
+          <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+          <End Role="Customers_Table" Type="Self.Customers_Table" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductTable">
+              <PropertyRef Name="proId" />
+            </Principal>
+            <Dependent Role="Customers_Table">
+              <PropertyRef Name="proId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="JulyDotNetBatch2020Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers_Table" EntityType="Self.Customers_Table" />
+          <EntitySet Name="ProductTables" EntityType="Self.ProductTable" />
+          <AssociationSet Name="FK_Customers_Table_ProductTable" Association="Self.FK_Customers_Table_ProductTable">
+            <End Role="ProductTable" EntitySet="ProductTables" />
+            <End Role="Customers_Table" EntitySet="Customers_Table" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="JulyDotNetBatch2020ModelStoreContainer" CdmEntityContainer="JulyDotNetBatch2020Entities">
+          <EntitySetMapping Name="Customers_Table">
+            <EntityTypeMapping TypeName="JulyDotNetBatch2020Model.Customers_Table">
+              <MappingFragment StoreEntitySet="Customers_Table">
+                <ScalarProperty Name="customerId" ColumnName="customerId" />
+                <ScalarProperty Name="customerName" ColumnName="customerName" />
+                <ScalarProperty Name="proId" ColumnName="proId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTables">
+            <EntityTypeMapping TypeName="JulyDotNetBatch2020Model.ProductTable">
+              <MappingFragment StoreEntitySet="ProductTable">
+                <ScalarProperty Name="proId" ColumnName="proId" />
+                <ScalarProperty Name="proName" ColumnName="proName" />
+                <ScalarProperty Name="proRate" ColumnName="proRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

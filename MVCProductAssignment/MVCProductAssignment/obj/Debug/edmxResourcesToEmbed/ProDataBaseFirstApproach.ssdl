@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="JulyDotNetBatch2020Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Customers_Table">
+    <Key>
+      <PropertyRef Name="customerId" />
+    </Key>
+    <Property Name="customerId" Type="int" Nullable="false" />
+    <Property Name="customerName" Type="varchar" MaxLength="20" />
+    <Property Name="proId" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductTable">
+    <Key>
+      <PropertyRef Name="proId" />
+    </Key>
+    <Property Name="proId" Type="int" Nullable="false" />
+    <Property Name="proName" Type="varchar" MaxLength="20" />
+    <Property Name="proRate" Type="int" />
+  </EntityType>
+  <Association Name="FK_Customers_Table_ProductTable">
+    <End Role="ProductTable" Type="Self.ProductTable" Multiplicity="0..1" />
+    <End Role="Customers_Table" Type="Self.Customers_Table" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductTable">
+        <PropertyRef Name="proId" />
+      </Principal>
+      <Dependent Role="Customers_Table">
+        <PropertyRef Name="proId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="JulyDotNetBatch2020ModelStoreContainer">
+    <EntitySet Name="Customers_Table" EntityType="Self.Customers_Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTable" EntityType="Self.ProductTable" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Customers_Table_ProductTable" Association="Self.FK_Customers_Table_ProductTable">
+      <End Role="ProductTable" EntitySet="ProductTable" />
+      <End Role="Customers_Table" EntitySet="Customers_Table" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

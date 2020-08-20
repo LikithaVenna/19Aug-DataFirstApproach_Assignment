@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="JulyDotNetBatch2020ModelStoreContainer" CdmEntityContainer="JulyDotNetBatch2020Entities">
+    <EntitySetMapping Name="Customers_Table">
+      <EntityTypeMapping TypeName="JulyDotNetBatch2020Model.Customers_Table">
+        <MappingFragment StoreEntitySet="Customers_Table">
+          <ScalarProperty Name="customerId" ColumnName="customerId" />
+          <ScalarProperty Name="customerName" ColumnName="customerName" />
+          <ScalarProperty Name="proId" ColumnName="proId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductTables">
+      <EntityTypeMapping TypeName="JulyDotNetBatch2020Model.ProductTable">
+        <MappingFragment StoreEntitySet="ProductTable">
+          <ScalarProperty Name="proId" ColumnName="proId" />
+          <ScalarProperty Name="proName" ColumnName="proName" />
+          <ScalarProperty Name="proRate" ColumnName="proRate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

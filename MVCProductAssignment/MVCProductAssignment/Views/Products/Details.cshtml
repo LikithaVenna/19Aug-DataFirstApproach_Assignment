@@ -1,0 +1,25 @@
+﻿@model MVCProductAssignment.Models.Product
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Product Details</h2>
+<table class="table table-bordered table-hover">
+    <tbody>
+        <tr>
+            <td>Product Id:</td>
+            <td>@Model.productId</td>
+        </tr>
+        <tr>
+            <td>Product Name:</td>
+            <td>@Model.productName</td>
+        </tr>
+        <tr>
+            <td>Rate:</td>
+            <td>@Model.productRate</td>
+        </tr>
+    </tbody>
+</table>
+
+@Html.ActionLink("Back", "Index", "Products", null, new { @class = "btn btn-primary" })
